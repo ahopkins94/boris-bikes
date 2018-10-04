@@ -4,12 +4,14 @@ describe DockingStation do
   it { is_expected.to respond_to :release_bike}
 
   it "should return a Bike" do
-    subject.dock(Bike.new)
+    # here
+    subject.dock(double(:bike))
     expect(subject.release_bike).to be_an_instance_of(Bike)
   end
 
   it "should be working " do
-    subject.dock(Bike.new)
+    # here
+    subject.dock(double(:bike))
     expect(subject.release_bike.working?).to eq true
   end
 
@@ -18,7 +20,8 @@ describe DockingStation do
   end
 
   it "should show a docked bike" do
-    bike = Bike.new
+    # here
+    bike = double(:bike)
     subject.dock(bike)
     expect(subject.docked_bikes).to eq [bike]
   end
@@ -28,8 +31,9 @@ describe DockingStation do
   end
 
   it "dock(bike) should raise an error" do
-    subject.capacity.times { subject.dock(Bike.new) }
-    expect {subject.dock(Bike.new)}.to raise_error("Docking station is full")
+    # here
+    subject.capacity.times { subject.dock(double(:bike)) }
+    expect {subject.dock(double(:bike))}.to raise_error("Docking station is full")
   end
 
   it "should have a default capacity of DEFAULT_CAPACITY" do
@@ -42,16 +46,18 @@ describe DockingStation do
   end
 
   it "should report a broken bike" do
-    bike = Bike.new
+    # here
+    bike = double(:bike)
     bike.report_broken
     subject.dock(bike)
     expect(subject.docked_bikes[0].working?).to eq false
   end
 
   it "should release a working bike not a broken bike" do
-    working_bike = Bike.new
+    # here
+    working_bike = double(:bike)
     subject.dock(working_bike)
-    broken_bike = Bike.new
+    broken_bike = double(:bike)
     broken_bike.report_broken
     subject.dock(broken_bike)
     expect(subject.release_bike.working?).to eq true
