@@ -41,4 +41,20 @@ describe DockingStation do
     expect(station.capacity).to eq 30
   end
 
+  it "should report a broken bike" do
+    bike = Bike.new
+    bike.report_broken
+    subject.dock(bike)
+    expect(subject.docked_bikes[0].working?).to eq false
+  end
+
+  it "should release a working bike not a broken bike" do
+    working_bike = Bike.new
+    subject.dock(working_bike)
+    broken_bike = Bike.new
+    broken_bike.report_broken
+    subject.dock(broken_bike)
+    expect(subject.release_bike.working?).to eq true
+  end
+
 end
