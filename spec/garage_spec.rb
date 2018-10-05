@@ -9,4 +9,10 @@ describe Garage do
     subject.take_bikes(van)
     expect(subject.stored_bikes).to eq [bike]
   end
+
+  it 'should be able to fix broken bikes' do
+    subject.stored_bikes << bike
+    expect(bike).to receive(:fix)
+    subject.fix_bikes
+  end
 end

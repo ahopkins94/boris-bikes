@@ -1,4 +1,5 @@
-require 'docking_station'
+require_relative 'docking_station'
+require_relative 'bike'
 
 class Van
   attr_reader :stored_bikes
@@ -16,6 +17,3 @@ class Van
     end
   end
 end
-
-
-# [bike_1, bike_2].working?
