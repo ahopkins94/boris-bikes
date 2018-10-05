@@ -16,6 +16,15 @@ class Garage
   end
 
   def fix_bikes
-    @stored_bikes.each { |bike| bike.fix }
+    @stored_bikes.each(&:fix)
+  end
+
+  def release_fixed_bikes(van)
+    @stored_bikes.each do |bike|
+      if bike.working?
+        van.stored_bikes << bike
+        @stored_bikes.delete(bike)
+      end
+    end
   end
 end
