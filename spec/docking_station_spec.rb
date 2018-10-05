@@ -51,14 +51,10 @@ describe DockingStation do
     expect(subject.docked_bikes[0].working?).to eq false
   end
 
-  it "should release a working bike not a broken bike" do
-    bike = double("bike", :working? => true)
-    working_bike = bike
-    subject.dock(working_bike)
-    broken_bike = double("broken_bike", :working? => false, :report_broken => false)
-    broken_bike.report_broken
-    subject.dock(broken_bike)
-    expect(subject.release_bike.working?).to eq true
+  it "should not release a broken bike" do
+    bike = double("bike", :working? => false)
+    subject.dock(bike)
+    expect { subject.release_bike }.to raise_error "Bike not working!"
   end
 
 end

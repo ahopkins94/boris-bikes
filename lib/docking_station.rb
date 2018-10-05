@@ -12,12 +12,8 @@ class DockingStation
 
   def release_bike
     raise "Docking station is empty" if empty?
-    @docked_bikes.reverse.each do |bike|
-      if bike.working?
-        @docked_bikes.slice!(@docked_bikes.index(bike))
-        return bike
-      end
-    end
+    raise "Bike not working!" unless @docked_bikes.last.working?
+    @docked_bikes.pop
   end
 
   def dock(bike)
