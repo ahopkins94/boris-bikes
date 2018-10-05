@@ -22,7 +22,7 @@ describe DockingStation do
   it "should show a docked bike" do
     bike = double(:bike)
     subject.dock(bike)
-    expect(subject.docked_bikes).to eq [bike]
+    expect(subject.stored_bikes).to eq [bike]
   end
 
   it "release_bike should raise an error" do
@@ -48,7 +48,7 @@ describe DockingStation do
     bike = double("bike", :working? => false, :report_broken => false)
     bike.report_broken
     subject.dock(bike)
-    expect(subject.docked_bikes[0].working?).to eq false
+    expect(subject.stored_bikes[0].working?).to eq false
   end
 
   it "should not release a broken bike" do

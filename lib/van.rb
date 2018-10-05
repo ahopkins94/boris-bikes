@@ -9,10 +9,10 @@ class Van
   end
 
   def take_broken_bikes(station)
-    station.docked_bikes.each do |bike|
+    station.stored_bikes.each do |bike|
       if bike.working? == false
         @stored_bikes << bike
-        station.docked_bikes.delete(bike)
+        station.stored_bikes.delete(bike)
       end
     end
   end
@@ -20,7 +20,7 @@ class Van
   def deliver_working_bikes(station)
     @stored_bikes.each do |bike|
       if bike.working?
-        station.docked_bikes << bike
+        station.stored_bikes << bike
         @stored_bikes.delete(bike)
       end
     end
