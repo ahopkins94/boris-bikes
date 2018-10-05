@@ -8,10 +8,12 @@ class Garage
     @stored_bikes = []
   end
 
-  def take_bikes(van)
+  def take_broken_bikes(van)
     van.stored_bikes.each do |bike|
-      @stored_bikes << bike
-      van.stored_bikes.delete(bike)
+      if bike.working? == false
+        @stored_bikes << bike
+        van.stored_bikes.delete(bike)
+      end
     end
   end
 

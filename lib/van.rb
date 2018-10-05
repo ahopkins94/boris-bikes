@@ -16,4 +16,13 @@ class Van
       end
     end
   end
+
+  def deliver_working_bikes(station)
+    @stored_bikes.each do |bike|
+      if bike.working?
+        station.docked_bikes << bike
+        @stored_bikes.delete(bike)
+      end
+    end
+  end
 end

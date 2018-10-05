@@ -6,8 +6,8 @@ describe Garage do
   let(:van) { double(:van) }
 
   it 'should receive broken bikes to be fixed' do
-    allow(van).to receive(:stored_bikes).and_return([bike])
-    subject.take_bikes(van)
+    allow(van).to receive(:stored_bikes).and_return([bike, bike_2])
+    subject.take_broken_bikes(van)
     expect(subject.stored_bikes).to eq [bike]
   end
 
